@@ -1,0 +1,144 @@
+npm init -y
+
+npm install react --save
+npm install react-dom --save
+
+npm install webpack --save
+npm install webpack-dev-server --save
+npm install webpack-cli --save
+
+
+
+/// prefer a OS terminal opened with admin privielages
+------------------------------------------------
+
+npm install babel-core --save-dev
+npm install babel-loader@7 --save-dev
+
+npm install babel-preset-env --save-dev
+
+npm install babel-preset-es2015
+npm install babel-preset-react --save-dev
+npm install html-webpack-plugin --save-dev
+
+
+
+type nul > index.html
+type nul > App.js
+type nul > main.js
+type nul > webpack.config.js
+type nul > .babelrc
+
+
+webpack.config.js
+=======================================
+
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+   entry: './main.js',
+   output: {
+      path: path.join(__dirname, '/bundle'),
+      filename: 'index_bundle.js'
+   },
+   devServer: {
+      inline: true,
+      port: 8080
+   },
+   module: {
+      rules: [
+         {
+            test: /\.jsx?$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            query: {
+               presets: ['es2015', 'react']
+            }
+         }
+      ]
+   },
+   plugins:[
+      new HtmlWebpackPlugin({
+         template: './index.html'
+      })
+   ]
+}
+
+===================================================================
+
+
+content for .babelrc
+-------------------------------
+
+{
+   "presets":["env", "react"]
+}
+
+=============================================================
+
+
+package.json- changes (under scripts)
+
+------------------------------
+
+
+
+"start": "webpack-dev-server --mode development --open --hot",
+"build": "webpack --mode production"
+
+-------------------------------------------------------------------------
+
+content for index.html
+----------------------------------
+
+
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <meta charset = "UTF-8">
+      <title>React App</title>
+   </head>
+   <body>
+      <div id = "app"></div>
+      <script src = 'index_bundle.js'></script>
+   </body>
+</html>
+
+content for App.js
+----------------------------------
+import React, { Component } from 'react';
+class App extends Component{
+   render(){
+      return(
+         <div>
+            <h1>Hello World</h1>
+         </div>
+      );
+   }
+}
+export default App;
+
+
+content for main.js
+----------------------------------
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App.js';
+
+ReactDOM.render(<App />, document.getElementById('app'));
+
+
+Final Command
+-------------------------------
+
+npm start
+
+
+
+
+
+
+
+

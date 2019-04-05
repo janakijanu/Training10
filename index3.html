@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="react-0.14.3/build/react.js"></script>
+    <script src="react-0.14.3/build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.4.0/browser-polyfill.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.4.0/browser.js"></script>
+    <style>
+        body{
+            margin:1cm;
+        }
+        #rootUI{
+            padding:1cm;
+            border:solid;
+            background-image: url("images/images8/image24.jpg");
+        }
+    </style>
+    <script type="text/babel">
+
+
+
+    </script>
+</head>
+
+<body>
+    <div id="rootUI">
+    </div>
+    <script type="text/babel">
+        class Test extends React.Component{
+            constructor(){
+                super();
+                this.age=24;
+                this.gender="FEMALE";
+                this.cities=['Chennai', 'Delhi', 'Mumbai']
+                this.VIP=false;
+                this.interests=['FootBall', 'Cricket', 'Hockey' , 'Tennis']
+            }
+            render(){
+                var styleJson={
+                    width:"10cm",
+                    height:"3cm",
+                    backgroundColor:"pink"
+                }
+
+                var liItems=this.cities.map(
+                    function(cn){
+                        return <li>{cn}</li>
+                    }
+                );
+
+                var optionItems=this.cities.map(
+                    function(cn,idx){
+                        return <option value={idx}>{cn}</option>
+                    }
+                );
+
+                var interestItem=this.interests.map(
+                    function(it){
+                        return <br><input type="checkbox">{it}</input></br>
+                    }
+                );
+
+                var genderItem=this.interests.map(
+                    function(gi,idx){
+                        return <input type="radio" checked={idx ==0 ? 'checked' : ''}>{gi}</input>
+                    }
+                );
+
+                var output=<div>
+                                <h1>Eligible For Voting : {this.age>21 ? "Yes" : "No"} </h1>
+                                <h1>Gender : {this.gender.toLowerCase()}</h1>
+                                <p>Gender: <img src={this.gender=='MALE' ? './male-icon.jpg' :  './female-icon.ico'}></img></p>
+                                <div style={styleJson}></div>
+                                <ul>{liItems}</ul>
+                                <label>Age</label>
+                                <input value={this.age}></input>
+                                <br></br>
+                                <br></br>
+                                <label>City</label>
+                                <select>{optionItems}</select>
+                                <br></br>
+                                <br></br>
+                                <label>VIP</label>
+                                <input type='checkbox' checked={this.VIP ? 'checked' : ''}></input>
+                                <br></br>
+                                <br></br>
+                                <label>Gender</label>
+                                <input type="radio" checked={this.gender=='MALE' ? 'checked' : ''}></input><label>MALE</label>
+                                <input type="radio" checked={this.gender=='FEMALE' ? 'checked' : ''}></input><label>FEMALE</label>
+                                <br></br>
+                                <br></br>
+                                <div>
+                                    {interestItem}
+                                </div>
+                                <br></br>
+                                <label>Select Your Interest
+                                    <br></br>
+                                    <br></br>
+                                    {genderItem}
+                                </label>
+                            </div>
+                return output;
+            }
+        }
+
+        ReactDOM.render(<Test></Test>,document.getElementById("rootUI"));
+
+    </script>
+</body>
+
+</html>

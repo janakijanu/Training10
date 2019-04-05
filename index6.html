@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="react-0.14.3/build/react.js"></script>
+    <script src="react-0.14.3/build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.4.0/browser-polyfill.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.4.0/browser.js"></script>
+    <script type="text/babel">
+
+
+
+    </script>
+</head>
+
+<body>
+    <div id="rootUI">
+    </div>
+    <script type="text/babel">
+
+        class Calculator extends React.Component{
+            constructor(){
+                super();
+                this.state={
+                    "num1":0,
+                    "num2":0,
+                    "sumResult":0,
+                    "multiplyResult":0
+                }
+                this.addButtonHandler=this.addButtonHandler.bind(this);
+                this.multiplyButtonHandler=this.multiplyButtonHandler.bind(this);
+                this.number1ChangeHandler=this.number1ChangeHandler.bind(this);
+                this.number2ChangeHandler=this.number2ChangeHandler.bind(this);
+            }
+            getSum(){
+                var v1=parseInt(this.state.num1)
+                this.setState({
+                    "num1":v1
+                });
+                var v2=parseInt(this.state.num2)
+                this.setState({
+                    "num2":v2
+                });
+                return parseInt(this.state.num1)+parseInt(this.state.num2);
+            }
+            getProduct(){
+                this.setState({
+                    "num1":parseInt(this.state.num1)
+                });
+                this.setState({
+                    "num2":parseInt(this.state.num2)
+                });
+                return this.state.num1*this.state.num2;
+            }
+            addButtonHandler(event){
+                var res=this.getSum();
+                this.setState({
+                    "sumResult":res
+                })
+            }
+            multiplyButtonHandler(event){
+                var res1=this.getProduct();
+                this.setState({
+                    "multiplyResult":res1
+                })
+            }
+            number1ChangeHandler(event){
+                this.setState({
+                    "num1":event.target.value
+                });
+            }
+            number2ChangeHandler(event){
+                this.setState({
+                    "num2":event.target.value
+                });
+            }
+            render(){
+                var output=<div>
+                                <table>
+                                    <tr>
+                                        <td>Number1</td>
+                                        <td><input id="i1" value={this.state.num1} onChange={this.number1ChangeHandler}></input></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Number2</td>
+                                        <td><input id="i2" value={this.state.num2} onChange={this.number2ChangeHandler}></input></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Sum is</td>
+                                        <td>{this.state.sumResult}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Product is</td>
+                                        <td>{this.state.multiplyResult}</td>
+                                    </tr>
+                                </table>
+                                <button type="button" onClick={this.addButtonHandler}>Add</button>
+                                <button type="button" onClick={this.multiplyButtonHandler}>Multiply</button>
+                            </div>
+                return output;
+            }
+        }
+
+        ReactDOM.render(<Calculator></Calculator>,document.getElementById("rootUI"))
+        
+    </script>
+</body>
+
+</html>

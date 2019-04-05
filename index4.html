@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="react-0.14.3/build/react.js"></script>
+    <script src="react-0.14.3/build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.4.0/browser-polyfill.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.4.0/browser.js"></script>
+    <script type="text/babel">
+
+
+
+    </script>
+    <style>
+        body{
+            margin:2cm;
+        }
+        #rootUI{
+            width:50%;
+            text-align: center;
+            padding:1cm;
+            border:solid;
+            background-image: url("images/images8/image24.jpg");
+        }
+    </style>
+</head>
+
+<body>
+    <div id="rootUI">
+    </div>
+    <script type="text/babel">
+
+        class Person extends React.Component{
+            constructor(props){
+                super(props);
+
+            }
+            render(){
+                var output=<div>
+                                <p>{this.props.name}</p>
+                                <p>{this.props.location}</p>
+                            </div>
+                return output;
+            }
+        }
+
+        class Contact extends React.Component{
+            constructor(props){
+                super(props);
+            }
+            render(){
+                var output=<div>
+                                <p>{this.props.email}</p>
+                                <p>{this.props.phone}</p>
+                            </div>
+                return output;
+            }
+        }
+
+        class Main extends React.Component{
+            constructor(){
+                super();
+            }
+            render(){
+                var output=<div>
+                                <Person name="Janu" location="Chennai"></Person>
+                                <Contact email="janaki@gmail.com" phone="3078562536"></Contact>
+                            </div>
+                return output;
+            }
+        }
+
+        ReactDOM.render(<Main></Main>,document.getElementById("rootUI"))
+        
+    </script>
+</body>
+
+</html>

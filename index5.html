@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="react-0.14.3/build/react.js"></script>
+    <script src="react-0.14.3/build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.4.0/browser-polyfill.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.4.0/browser.js"></script>
+    <script type="text/babel">
+
+
+
+    </script>
+    <style>
+        body{
+            margin:1cm;
+        }
+        #rootUI{
+            padding:1cm;
+            border:solid;
+            background-image: url("images/images8/image24.jpg");
+        }
+    </style>
+</head>
+
+<body>
+    <div id="rootUI">
+    </div>
+    <script type="text/babel">
+
+        class TicketReservation extends React.Component{
+            constructor(props){
+                super(props);
+            }
+            render(){
+                var output=<h1>{this.props.title}</h1>
+                return output;
+            }
+        }
+
+        class TicketReservationFooter extends React.Component{
+            constructor(props){
+                super(props);
+            }
+            render(){
+                var output=<h3>{this.props.message}</h3>
+                return output;
+            }
+        }
+
+        class Passenger extends React.Component{
+            constructor(props){
+                super(props);
+            }
+            render(){
+                
+                var output=<tr>
+                                <td>{this.props.data["Passenger Name"]}</td>
+                                <td>{this.props.data["Passenger Age"]}</td>
+                                <td>{this.props.data["Passenger Gender"]}</td>
+                                <td>{this.props.data["Seat Number"]}</td>
+                           </tr>
+                return output;
+            }
+        }
+
+        class Main extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    "appTitle"  : "Ticket Reservation System Version",
+                    "appData"   : [
+                                    {
+                                        "Passenger Name" : "Janaki",
+                                        "Passenger Age" : 28,
+                                        "Passenger Gender" : "FEMALE",
+                                        "Seat Number" : "55 - 67"
+                                    },
+                                    {
+                                        "Passenger Name" : "Sheela",
+                                        "Passenger Age" : 28,
+                                        "Passenger Gender" : "FEMALE",
+                                        "Seat Number" : "50 - 60"
+                                    },
+                                    {
+                                        "Passenger Name" : "Ravi",
+                                        "Passenger Age" : 70,
+                                        "Passenger Gender" : "MALE",
+                                        "Seat Number" : "40 - 41"
+                                    },
+                                    {
+                                        "Passenger Name" : "Raju",
+                                        "Passenger Age" : 50,
+                                        "Passenger Gender" : "MALE",
+                                        "Seat Number" : "40 - 70"
+                                    },
+                                    {
+                                        "Passenger Name" : "Ram",
+                                        "Passenger Age" : 25,
+                                        "Passenger Gender" : "MALE",
+                                        "Seat Number" : "30 - 33"
+                                    }
+                                ],
+                    "appFooter" : "Copy Rights @ Janu Travels",
+                }
+            }
+            render(){
+
+                var rowElement=this.state.appData.map(
+                    function(passengerData,i){
+                        return <Passenger data={passengerData}></Passenger>
+                    }
+                );
+
+                var styleJson1={
+                    backgroundColor:"blueviolet",
+                    border:'solid',
+                    width:"20cm",
+                    height:"15cm",
+                    width:"100%"
+                }
+
+                var output=<div>
+                                <TicketReservation title={this.state.appTitle}></TicketReservation>
+                                <div>
+                                    <table>
+                                        <tbody style={styleJson1}>
+                                            {rowElement}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <TicketReservationFooter message={this.state.appFooter}></TicketReservationFooter>
+                            </div>
+                return output;
+            }
+        }
+
+        ReactDOM.render(<Main></Main>,document.getElementById("rootUI"))
+        
+    </script>
+</body>
+
+</html>
